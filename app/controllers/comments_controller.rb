@@ -10,33 +10,31 @@ class CommentsController < ApplicationController
   def new
     @article = Article.find(params[:article_id])
     @comment = @article.comments.new
-    
   end
 
   def create
-    # pry.byebug
     article_id = params[:article_id]
-    article = Article.find(article_id)
-
+    
     comment = current_user.comments.new(comment_params)
     comment.update(article_id: article_id)
 
-    # current_user.comments.create(comment_params)
+    errors = comment.errors.full_messages.join(". ")
+    errors = "Unsuccessful Comment: #{errors}"
 
-    redirect_to article_path(article)
+    # pry.byebug
+
+    # @article = Article.find(article_id)
+    redirect_to :back, alert: errors
+    # render "articles/show"
   end
 
   def show
-    
   end
 
   def edit
-    
   end
 
   def update
-
-    
   end
 
   def destroy

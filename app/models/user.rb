@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :comments
 
+  #Validations
   validates :username, uniqueness: true,
                        presence: true
 
