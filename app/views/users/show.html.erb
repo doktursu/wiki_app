@@ -1,0 +1,7 @@
+<h3><%= @user.username %></h3>
+<p><%= "Role: #{@user.role}" if @user.role %></p>
+
+<% if @user.articles.any? %>
+  <% @articles = @user.articles %>
+  <%= render "articles/list" %>
+<% end %>

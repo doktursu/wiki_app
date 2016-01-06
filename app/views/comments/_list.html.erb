@@ -1,6 +1,6 @@
 <% @comments.each do |comment| %>
   <div class="comment">
-    <p><%= link_to comment.user.username, user_path(comment.user), class: "comment-user" %><span class="comment-time"><%= distance_of_time_in_words_to_now(comment.created_at) %> ago</span></p>
+    <p><%= link_to comment.user.username, user_path(comment.user), class: "comment-user" %> <span class="comment-time"><%= distance_of_time_in_words_to_now(comment.created_at) %> ago</span></p>
     <p class="comment-content" ><%= comment.content %></p>
   </div>
 <% end %>
