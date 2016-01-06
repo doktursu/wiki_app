@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-  before_action :load_article, except: [:index, :new, :create]
+  before_action :load_article, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
   before_action :authenticate_user!
 
@@ -19,22 +19,25 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    
+    @comment = Comment.new
   end
 
   def edit
-    
   end
 
   def update
     @article.update(article_params)
     redirect_to articles_path
-    
   end
 
   def destroy
     @article.destroy
     redirect_to articles_path
+  end
+
+  def my_articles
+    @articles = Article.where(user_id: current_user.id)
+    render "index"
   end
 
   private

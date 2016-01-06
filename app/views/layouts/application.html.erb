@@ -11,14 +11,25 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
-<% if current_user %>
-  <%= current_user.username %><%= ", #{current_user.role.capitalize}" if current_user.role %>
-  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-  <%= link_to 'Edit Account', edit_user_registration_path %>
-<% else %>
-  <%= link_to 'Log In', new_user_session_path %>
-  <%= link_to 'Sign Up', new_user_registration_path %>
-<% end %>
+<header>
+  <h1>Wikiapp</h1>
+  <div class="login">
+    <% if current_user %>
+      <%= current_user.username %><%= ", #{current_user.role.capitalize}" if current_user.role %>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+      <%= link_to 'Edit Account', edit_user_registration_path %>
+    <% else %>
+      <%= link_to 'Log In', new_user_session_path %>
+      <%= link_to 'Sign Up', new_user_registration_path %>
+    <% end %>
+  </div>
+  <nav class="nav">
+    <ul>
+      <li><%= link_to 'All Articles', articles_path %></li>
+      <li><%= link_to 'My Articles', my_articles_articles_path %></li>
+    </ul>
+  </nav>
+</header>
 
 <%= yield %>
 

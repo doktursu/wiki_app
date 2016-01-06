@@ -1,18 +1,15 @@
 <h3><%= @article.title %></h3>
+<div class="btns">
+  <%= link_to 'Edit', edit_article_path(@article) %>
+  <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Delete article?" } %>
+</div>
 <h4>By: <%= @article.user.name %></h4>
 <p><%= @article.content %></p>
 
 <h3>Comments</h3>
+<%= render "comments/form" %>
 
-<% @article.comments.each do |comment| %>
-  <div class="comment">
-    <%= comment.user.username %> says:
-    <%= comment.created_at %>
-    <br>
-    <%= comment.content %>
-  </div>
-<% end %>
-
-<%= link_to 'Add Comment', new_article_comment_path(@article) %>
+<% @comments = @article.comments.order(created_at: :desc) %>
+<%= render "comments/list" %>
 
 <%= link_to 'Back', articles_path %>
