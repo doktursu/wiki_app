@@ -1,0 +1,10 @@
+<h2>New Comment</h2>
+
+<%= form_for [@article, @comment] do |f| %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <br><br>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Back', articles_path %>
