@@ -18,14 +18,10 @@ class CommentsController < ApplicationController
     comment = current_user.comments.new(comment_params)
     comment.update(article_id: article_id)
 
-    errors = comment.errors.full_messages.join(". ")
-    errors = "Unsuccessful Comment: #{errors}"
+    errors = "Unsuccessful Comment: #{comment.errors.full_messages.join(". ")}" if comment.invalid?
 
-    # pry.byebug
-
-    # @article = Article.find(article_id)
     redirect_to :back, alert: errors
-    # render "articles/show"
+
   end
 
   def show
