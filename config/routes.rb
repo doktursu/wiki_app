@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :users
+  resources :users, only: :show
   resources :articles do
     resources :comments
-    get 'my_articles', on: :collection
+    get 'user_articles', on: :collection
   end
 
   root to: 'articles#index'

@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end
 
-  def my_articles
+  def user_articles
     @articles = Article.where(user_id: current_user.id)
     render "index"
   end

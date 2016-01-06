@@ -27,7 +27,7 @@
     <ul>
       <li><%= link_to 'All Articles', articles_path %></li>
       <% if can? :create, Article %>
-        <li><%= link_to 'My Articles', my_articles_articles_path %></li>
+        <li><%= link_to 'My Articles', user_articles_articles_path %></li>
       <% end %>
     </ul>
   </nav>

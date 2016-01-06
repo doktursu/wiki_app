@@ -6,6 +6,7 @@ class Ability
     if user.role?(:admin)
         can :manage, :all
     elsif user.role?(:author)
+        can :user_articles, Article
         can [:create, :read], [Article, Comment]
         can :update, [Article, Comment] do |object|
             object.user == user
