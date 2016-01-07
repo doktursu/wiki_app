@@ -7,12 +7,13 @@ class Ability
         can :manage, :all
     elsif user.role?(:author)
         can :user_articles, Article
+        can :read, User
         can [:create, :read], [Article, Comment]
         can :update, [Article, Comment] do |object|
             object.user == user
         end
     else
-        can :read, Article
+        can :read, [Article, User]
         can [:create, :read], Comment
         can :update, Comment do |comment|
             comment.user == user

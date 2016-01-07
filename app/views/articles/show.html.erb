@@ -1,8 +1,10 @@
 <h3><%= @article.title %></h3>
-<div class="btns">
-  <%= link_to 'Edit', edit_article_path(@article) %>
-  <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Delete article?" } %>
-</div>
+<% if can? :update, @article %>
+  <div class="btns">
+    <%= link_to 'Edit', edit_article_path(@article) %>
+    <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Delete article?" } %>
+  </div>
+<% end %>
 <h4>By: <%= link_to @article.user.username, user_path(@article.user) %></h4>
 <p><%= @article.content %></p>
 

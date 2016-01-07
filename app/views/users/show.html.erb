@@ -1,7 +1,14 @@
 <h3><%= @user.username %></h3>
 <p><%= "Role: #{@user.role}" if @user.role %></p>
 
+<% if can? :update, @user %>
+  <%= link_to "Edit User", edit_user_path(@user) %>
+<% end %>
+
 <% if @user.articles.any? %>
+  <h4>Articles</h4>
   <% @articles = @user.articles %>
   <%= render "articles/list" %>
+<% else %>
+  <p><%= @user.username %> has no articles</p>
 <% end %>

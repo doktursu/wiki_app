@@ -6,34 +6,39 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="fluid-container">
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<header>
-  <h1>Wikiapp</h1>
-  <div class="login">
-    <% if current_user %>
-      <%= current_user.username %><%= ", #{current_user.role.capitalize}" if current_user.role %>
-      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-      <%= link_to 'Edit Account', edit_user_registration_path %>
-    <% else %>
-      <%= link_to 'Log In', new_user_session_path %>
-      <%= link_to 'Sign Up', new_user_registration_path %>
-    <% end %>
-  </div>
-  <nav class="nav">
-    <ul>
+<div class="container">
+  <p class="notice alert-success"><%= notice %></p>
+  <p class="alert alert-danger"><%= alert %></p>
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <%= link_to WikiApp, root_path, class: "navbar-brand" %>
+    </div>
+    <ul class="nav navbar-nav">
       <li><%= link_to 'All Articles', articles_path %></li>
       <% if can? :create, Article %>
         <li><%= link_to 'My Articles', user_articles_articles_path %></li>
       <% end %>
+      <li><%= link_to 'Authors', users_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
+        <li><p class="navbar-text">Signed in as <%= link_to current_user.username, user_path(current_user), class: "navbar-link" %><%= ", #{current_user.role.capitalize}" if current_user.role %></p></li>
+        <li>
+          <div class="btn-group">
+            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "btn btn-default navbar-btn" %>
+            <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-default navbar-btn" %>
+            </div>
+          </li>
+      <% else %>
+        <li><%= link_to 'Log In', new_user_session_path, class: "btn btn-default navbar-btn" %></li>
+        <li><%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-default navbar-btn" %></li>
+      <% end %>
     </ul>
   </nav>
-</header>
 
-<%= yield %>
-
+  <%= yield %>
+</div>
 </body>
 </html>

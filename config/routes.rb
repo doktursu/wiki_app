@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :users, only: :show
+  resources :users, except: :destroy
   resources :articles do
     resources :comments
     get 'user_articles', on: :collection
